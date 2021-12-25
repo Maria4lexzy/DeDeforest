@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">De-Deforest</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="clear_map">Clear</string>
+    <string name="clickable">Clickable</string>
+    <string name="color">Color</string>
+    <string name="compass">Compass</string>
+    <string name="switch_image">Switch Image</string>
+    <string name="transparency">Transparency</string>
+
+
+</resources>
