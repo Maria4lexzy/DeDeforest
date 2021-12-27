@@ -35,18 +35,30 @@
             android:layout_below="@+id/transparencySeekBar"
             android:onClick="switchImage"
             android:text="@string/switch_image" />
-
-
-        <DatePicker
-            android:id="@+id/editTextDate"
+        <Button
+            android:id="@+id/GetBounds"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/transparencySeekBar"
             android:layout_alignBottom="@+id/switchImage"
             android:layout_toEndOf="@+id/switchImage"
             android:layout_toRightOf="@+id/switchImage"
-            android:ems="10"
-            android:inputType="date"
-            android:datePickerMode="calendar"/>
+            android:onClick="getVisibleBoundLatLng"
+            android:text="GetBounds" />
+
+
+
+        <!--   <DatePicker
+               android:id="@+id/editTextDate"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignBottom="@+id/switchImage"
+               android:layout_toEndOf="@+id/switchImage"
+               android:layout_toRightOf="@+id/switchImage"
+               android:ems="10"
+               android:inputType="date"
+               android:datePickerMode="calendar"/>-->
+
 
 
     </RelativeLayout>

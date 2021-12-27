@@ -14,6 +14,8 @@ import android.widget.CheckBox;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -23,6 +25,8 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.GroundOverlay;
 import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +45,7 @@ public class GroundOverlay1 extends  AppCompatActivity
 
     private static final LatLng NEWARK = new LatLng(40.714086, -74.228697);
     private LatLng centerLocation;
+    private FusedLocationProviderClient fusedLocationClient;
 
     private static final LatLng NEAR_NEWARK =
             new LatLng(NEWARK.latitude - 0.001, NEWARK.longitude - 0.025);
@@ -68,6 +73,7 @@ public class GroundOverlay1 extends  AppCompatActivity
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        fusedLocationClient= LocationServices.getFusedLocationProviderClient(this);
     }
 
     @Override
@@ -81,12 +87,13 @@ public class GroundOverlay1 extends  AppCompatActivity
         // Override the default content description on the view, for accessibility mode.
         // Ideally this string would be localised.
         map.setContentDescription("Google Map with ground overlay.");
+
     }
 public void setOverlayImage(GoogleMap mMap){
     // Register a listener to respond to clicks on GroundOverlays.
     mMap.setOnGroundOverlayClickListener(this);
 
-    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(NEWARK, 11));
+    //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(NEWARK, 11));
 
     images.clear();
     images.add(BitmapDescriptorFactory.fromResource(R.drawable.newark_nj_1922));
@@ -139,6 +146,18 @@ public void setOverlayImage(GoogleMap mMap){
             // Permission to access the location is missing. Show rationale and request permission
             ActivityCompat.requestPermissions(this,myPermission, 200);
         }
+
+        fusedLocationClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(@NonNull Location location) {
+                if(location!=null){
+                    centerLocation=new LatLng(location.getLatitude(), location.getLongitude());
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(centerLocation, 11));
+
+
+                }
+            }
+        });
     }
     @Override
     public boolean onMyLocationButtonClick() {
@@ -153,4 +172,11 @@ public void setOverlayImage(GoogleMap mMap){
     }
 
 
+    public void getVisibleBoundLatLng(View view) {
+        LatLngBounds currentMapView=mMap.getProjection().getVisibleRegion().latLngBounds;
+
+        Toast.makeText(this, "bounds:\n"+currentMapView, Toast.LENGTH_LONG).show();
+
+
     }
+}
