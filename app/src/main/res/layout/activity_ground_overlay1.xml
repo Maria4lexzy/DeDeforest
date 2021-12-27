@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GroundOverlay1"
+    tools:context="com.example.DeDeforest.GroundOverlay1"
     android:orientation="vertical">
 
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="104dp"
         android:background="@color/white"
         android:padding="5dp">
 
@@ -36,16 +36,18 @@
             android:onClick="switchImage"
             android:text="@string/switch_image" />
 
-        <CheckBox
-            android:id="@+id/toggleClickability"
+
+        <DatePicker
+            android:id="@+id/editTextDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/switchImage"
             android:layout_toEndOf="@+id/switchImage"
             android:layout_toRightOf="@+id/switchImage"
-            android:checked="true"
-            android:onClick="toggleClickability"
-            android:text="@string/clickable" />
+            android:ems="10"
+            android:inputType="date"
+            android:datePickerMode="calendar"/>
+
 
     </RelativeLayout>
 
@@ -56,13 +58,4 @@
         android:layout_height="match_parent" />
 
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="210dp"
-        android:layout_marginTop="387dp"
-        android:layout_marginEnd="144dp"
-        android:layout_marginBottom="325dp"
-        android:text="TextView" />
 </LinearLayout>
