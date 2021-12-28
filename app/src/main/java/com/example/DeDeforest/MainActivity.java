@@ -30,9 +30,11 @@ private Button openMapBtn, openOverlayBtn;
         openMapBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent();
+
+               /* Intent intent=new Intent();
                 intent.setClass(getApplicationContext(),MapsActivity.class);
-                startActivity(intent);
+                startActivity(intent);*/
+
             }
         });
 

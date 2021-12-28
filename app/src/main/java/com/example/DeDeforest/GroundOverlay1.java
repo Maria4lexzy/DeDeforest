@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.DialogFragment;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -176,7 +177,16 @@ public void setOverlayImage(GoogleMap mMap){
         LatLngBounds currentMapView=mMap.getProjection().getVisibleRegion().latLngBounds;
 
         Toast.makeText(this, "bounds:\n"+currentMapView, Toast.LENGTH_LONG).show();
+        LatLng northeast=currentMapView.northeast;
+        LatLng southwest=currentMapView.southwest;
+DialogFragment dialog=new RequestDataFragment().newInstance("NORTH WEST\n"+"Lat: "+northeast.latitude
+                                                            +"\nLong:"+ northeast.longitude+"\nSOUTH WEST\n"
+                                                            +"Lat: "+southwest.latitude+"\nLong: "
+                                                            +southwest.longitude);
+dialog.show(getSupportFragmentManager(),"NoticeDialgFragment");
+
 
 
     }
+
 }
