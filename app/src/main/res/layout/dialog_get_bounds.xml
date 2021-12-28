@@ -3,18 +3,6 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/tv_latlng"
-        android:layout_width="296dp"
-        android:layout_height="55dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginBottom="16dp"
-        android:fontFamily="sans-serif"
-        android:text="bounds values"
-        android:textColor="@color/purple_200"/>
-
     <DatePicker
         android:id="@+id/datePicker1"
         android:layout_width="301dp"
