@@ -82,7 +82,6 @@ public class GroundOverlay1 extends  AppCompatActivity
         mMap=map;
         mMap.setOnMyLocationButtonClickListener(this);
         mMap.setOnMyLocationClickListener(this);
-        setOverlayImage(mMap);
         enableMyLocation();
 
         // Override the default content description on the view, for accessibility mode.
@@ -90,20 +89,20 @@ public class GroundOverlay1 extends  AppCompatActivity
         map.setContentDescription("Google Map with ground overlay.");
 
     }
-public void setOverlayImage(GoogleMap mMap){
+public void setOverlayImage(LatLng cLocation){
     // Register a listener to respond to clicks on GroundOverlays.
     mMap.setOnGroundOverlayClickListener(this);
 
     //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(NEWARK, 11));
 
     images.clear();
-    images.add(BitmapDescriptorFactory.fromResource(R.drawable.newark_nj_1922));
+    images.add(BitmapDescriptorFactory.fromResource(R.drawable.sabinov));
     images.add(BitmapDescriptorFactory.fromResource(R.drawable.newark_prudential_sunny));
 
     // Add a large overlay at Newark on top of the smaller overlay.
     groundOverlay = mMap.addGroundOverlay(new GroundOverlayOptions()
             .image(images.get(currentEntry)).anchor(0, 1)
-            .position(NEWARK, 8600f, 6500f)
+            .position(cLocation, 8600f, 4500f)
             .bearing(0)
             .clickable(true));
     transparencyBar.setOnSeekBarChangeListener(this);
@@ -143,7 +142,7 @@ public void setOverlayImage(GoogleMap mMap){
                 mMap.setMyLocationEnabled(true);
             }
         } else {
-            String myPermission[]={"android.permission.ACCESS_FINE_LOCATION"};
+            String[] myPermission ={"android.permission.ACCESS_FINE_LOCATION"};
             // Permission to access the location is missing. Show rationale and request permission
             ActivityCompat.requestPermissions(this,myPermission, 200);
         }
@@ -154,6 +153,7 @@ public void setOverlayImage(GoogleMap mMap){
                 if(location!=null){
                     centerLocation=new LatLng(location.getLatitude(), location.getLongitude());
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(centerLocation, 11));
+                    setOverlayImage(centerLocation);
 
 
                 }
@@ -179,11 +179,11 @@ public void setOverlayImage(GoogleMap mMap){
         Toast.makeText(this, "bounds:\n"+currentMapView, Toast.LENGTH_LONG).show();
         LatLng northeast=currentMapView.northeast;
         LatLng southwest=currentMapView.southwest;
-DialogFragment dialog=new RequestDataFragment().newInstance("NORTH WEST\n"+"Lat: "+northeast.latitude
+        DialogFragment dialog=new RequestDataFragment().newInstance("NORTH WEST\n"+"Lat: "+northeast.latitude
                                                             +"\nLong:"+ northeast.longitude+"\nSOUTH WEST\n"
                                                             +"Lat: "+southwest.latitude+"\nLong: "
                                                             +southwest.longitude);
-dialog.show(getSupportFragmentManager(),"NoticeDialgFragment");
+        dialog.show(getSupportFragmentManager(),"NoticeDialgFragment");
 
 
 
